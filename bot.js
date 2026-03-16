@@ -1,38 +1,69 @@
 const mineflayer = require('mineflayer')
 
+const HOST = "blockoria.mcserverhost.com"
+const PORT = 25565
+const USERNAME = "BlockoriaSMPBot"
+const PASSWORD = "botbotRU"
+
+process.on('uncaughtException', (err) => {
+  console.log("CRASH PREVENTED:", err)
+})
+
 function createBot(){
 
 const bot = mineflayer.createBot({
-  host: 'blockoriasmp12010.mcsh.io',
-  port: 25565,
-  username: 'BlockoriaSMPBot'
+  host: HOST,
+  port: PORT,
+  username: USERNAME,
+  version: false
 })
 
 bot.once('spawn', () => {
 
-console.log("Бот зашел")
+  console.log("Бот зашел на сервер")
 
-setTimeout(()=>{
-bot.chat("/login botbotRU")
-},4000)
+  setTimeout(()=>{
+    bot.chat(`/register ${PASSWORD} ${PASSWORD}`)
+  },3000)
 
-startChatSpam(bot)
-startMovement(bot)
+  setTimeout(()=>{
+    bot.chat(`/login ${PASSWORD}`)
+  },6000)
+
+  startMovement(bot)
+  startLook(bot)
+  startChatSpam(bot)
 
 })
 
-bot.on("death", ()=>{
-console.log("Бот умер -> респавн")
-bot.chat("/spawn")
+bot.on("messagestr",(msg)=>{
+  console.log("CHAT:",msg)
 })
 
-bot.on("end", ()=>{
-console.log("Переподключение через 10 сек")
-setTimeout(createBot,10000)
+bot.on("death",()=>{
+  console.log("Бот умер")
+
+  setTimeout(()=>{
+    try{
+      bot.respawn()
+    }catch{
+      bot.quit()
+    }
+  },2000)
 })
 
-bot.on("error", console.log)
-bot.on("kicked", console.log)
+bot.on("kicked",(reason)=>{
+  console.log("Кик:",reason)
+})
+
+bot.on("error",(err)=>{
+  console.log("Ошибка:",err)
+})
+
+bot.on("end",()=>{
+  console.log("Перезаход через 10 сек")
+  setTimeout(createBot,10000)
+})
 
 }
 
@@ -40,7 +71,15 @@ function startChatSpam(bot){
 
 setInterval(()=>{
 
-bot.chat("Телеграм канал сервера: https://t.me/blockoriaSMP")
+const messages = [
+"Телеграм канал сервера: https://t.me/blockoriaSMP",
+"Присоединяйтесь к нашему телеграму: https://t.me/blockoriaSMP",
+"Новости сервера тут: https://t.me/blockoriaSMP"
+]
+
+const msg = messages[Math.floor(Math.random()*messages.length)]
+
+bot.chat(msg)
 
 },150000)
 
@@ -51,7 +90,6 @@ function startMovement(bot){
 setInterval(()=>{
 
 const moves = ["forward","back","left","right"]
-
 const move = moves[Math.floor(Math.random()*moves.length)]
 
 bot.setControlState(move,true)
@@ -61,14 +99,29 @@ bot.setControlState(move,false)
 },3000)
 
 if(Math.random()>0.5){
+
 bot.setControlState("jump",true)
 
 setTimeout(()=>{
 bot.setControlState("jump",false)
-},500)
+},400)
+
 }
 
-},90000)
+},80000)
+
+}
+
+function startLook(bot){
+
+setInterval(()=>{
+
+const yaw = Math.random() * Math.PI * 2
+const pitch = (Math.random() - 0.5) * 0.5
+
+bot.look(yaw,pitch,true)
+
+},60000)
 
 }
 
