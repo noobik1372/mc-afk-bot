@@ -18,8 +18,8 @@ const bot = mineflayer.createBot({
   version: false
 })
 
-bot._client.removeAllListeners('playerChat')
-bot._client.removeAllListeners('systemChat')
+bot._client.on('playerChat', () => {})
+bot._client.on('systemChat', () => {})
 
 bot.once('spawn', () => {
 
@@ -43,9 +43,6 @@ bot.once('spawn', () => {
 
 })
 
-bot.on("messagestr",(msg)=>{
-  console.log("CHAT:",msg)
-})
 
 bot.on("death",()=>{
   console.log("Бот умер")
