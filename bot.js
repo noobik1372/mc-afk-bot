@@ -16,8 +16,7 @@ const bot = mineflayer.createBot({
   port: PORT,
   username: USERNAME,
   version: false
-  keepAlive: true
-  checkTimeoutInterval: 60000
+  
 })
 
 bot.removeAllListeners('message')
