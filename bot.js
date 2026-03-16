@@ -1,6 +1,6 @@
 const mineflayer = require('mineflayer')
 
-const HOST = "blockoria.mcserverhost.com"
+const HOST = "blockoriasmp12010.mcsh.io"
 const PORT = 25565
 const USERNAME = "BlockoriaSMPBot"
 const PASSWORD = "botbotRU"
