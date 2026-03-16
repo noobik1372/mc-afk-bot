@@ -19,12 +19,18 @@ const bot = mineflayer.createBot({
   
 })
 
-bot.removeAllListeners('message')
-bot.removeAllListeners('messagestr')
-bot.removeAllListeners('chat')
-
+bot._client.removeAllListeners('playerChat')
+bot._client.removeAllListeners('systemChat')
+bot._client.removeAllListeners('message')
+bot._client.removeAllListeners('messagestr')
+  
 bot.once('spawn', () => {
 
+  bot._client.removeAllListeners('playerChat')
+  bot._client.removeAllListeners('systemChat')
+  bot._client.removeAllListeners('message')
+  bot._client.removeAllListeners('messagestr')
+  
   console.log("Бот зашел на сервер")
 
   setTimeout(()=>{
@@ -38,10 +44,6 @@ bot.once('spawn', () => {
   startMovement(bot)
   startLook(bot)
   startChatSpam(bot)
-
-  bot.removeAllListeners('message')
-  bot.removeAllListeners('messagestr')
-  bot.removeAllListeners('chat')
   
   setInterval(() => {
   bot.swingArm("right")
