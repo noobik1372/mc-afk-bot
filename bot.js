@@ -18,6 +18,9 @@ const bot = mineflayer.createBot({
   version: false
 })
 
+bot._client.removeAllListeners('playerChat')
+bot._client.removeAllListeners('systemChat')
+
 bot.once('spawn', () => {
 
   console.log("Бот зашел на сервер")
@@ -33,6 +36,10 @@ bot.once('spawn', () => {
   startMovement(bot)
   startLook(bot)
   startChatSpam(bot)
+
+  setInterval(() => {
+  bot.swingArm("right")
+}, 15000)
 
 })
 
