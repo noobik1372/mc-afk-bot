@@ -16,10 +16,13 @@ const bot = mineflayer.createBot({
   port: PORT,
   username: USERNAME,
   version: false
+  keepAlive: true
+  checkTimeoutInterval: 60000
 })
 
-bot._client.on('playerChat', () => {})
-bot._client.on('systemChat', () => {})
+bot.removeAllListeners('message')
+bot.removeAllListeners('messagestr')
+bot.removeAllListeners('chat')
 
 bot.once('spawn', () => {
 
@@ -37,6 +40,10 @@ bot.once('spawn', () => {
   startLook(bot)
   startChatSpam(bot)
 
+  bot.removeAllListeners('message')
+  bot.removeAllListeners('messagestr')
+  bot.removeAllListeners('chat')
+  
   setInterval(() => {
   bot.swingArm("right")
 }, 15000)
