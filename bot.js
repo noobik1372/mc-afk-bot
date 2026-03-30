@@ -16,6 +16,7 @@ function createBot() {
   console.log(`[${USERNAME}] → Запуск...`)
 
   bot.once('spawn', () => {
+    bot.physicsEnabled = false
     console.log(`[${USERNAME}] → Зашёл на сервер`)
 
     // Только register и login
