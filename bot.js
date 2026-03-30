@@ -25,8 +25,8 @@ function createBot(){
     console.log("Бот заспавнился...")
 
     // Отключаем всю физику сразу
-    bot.physicsEnabled = false
-    console.log("Физика отключена")
+   // bot.physicsEnabled = false
+    // console.log("Физика отключена")
 
     // Регистрация и логин
     setTimeout(() => bot.chat(`/register ${PASSWORD} ${PASSWORD}`), 3000)
