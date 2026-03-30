@@ -26,6 +26,8 @@ bot._client.removeAllListeners('messagestr')
   
 bot.once('spawn', () => {
 
+  await bot.waitForChunksToLoad();
+  
   bot._client.removeAllListeners('playerChat')
   bot._client.removeAllListeners('systemChat')
   bot._client.removeAllListeners('message')
