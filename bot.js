@@ -72,8 +72,8 @@ setInterval(()=>{
 const messages = [
 "Телеграм канал сервера: https://t.me/blockoriaSMP",
 "Присоединяйтесь к нашему каналу: https://t.me/blockoriaSMP",
-"Новости сервера тут: https://t.me/blockoriaSMP"
-"Если увидели баг в работе сервера/плагинов сообщите в TG: @BlockoriaSMP_Help. За находку багов вы можете получить вознаграждение."
+"Новости сервера тут: https://t.me/blockoriaSMP",
+"Если увидели баг в работе сервера/плагинов сообщите в TG: @BlockoriaSMP_Help. За находку багов вы можете получить вознаграждение.",
 "Пожелания? Жалобы? Вопросы? Пиши админу, ответим! (TG: @BlockoriaSMP_Help)"
 ]
 const msg = messages[Math.floor(Math.random()*messages.length)]
