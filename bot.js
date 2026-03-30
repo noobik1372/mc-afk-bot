@@ -21,8 +21,8 @@ bot._client.removeAllListeners('systemChat')
 bot._client.removeAllListeners('message')
 bot._client.removeAllListeners('messagestr')
 
-bot.once('spawn', async () => {          // ←←← ИЗМЕНЕНО НА async
-  await bot.waitForChunksToLoad();       // ←←← теперь правильно работает
+bot.once('spawn', async () => {
+  await bot.waitForChunksToLoad();
 
   bot._client.removeAllListeners('playerChat')
   bot._client.removeAllListeners('systemChat')
@@ -30,19 +30,32 @@ bot.once('spawn', async () => {          // ←←← ИЗМЕНЕНО НА asyn
   bot._client.removeAllListeners('messagestr')
 
   console.log("Бот зашел на сервер")
+
   setTimeout(()=>{
     bot.chat(`/register ${PASSWORD} ${PASSWORD}`)
   },3000)
+
   setTimeout(()=>{
     bot.chat(`/login ${PASSWORD}`)
+    
+    // ←←← НОВОЕ: через 2 секунды после логина ставим креатив
+    setTimeout(() => {
+      bot.chat('/gamemode creative')
+      console.log("Бот переведён в креатив")
+    }, 2000)
   },6000)
-  startMovement(bot)
-  startLook(bot)
-  startChatSpam(bot)
+
+  // ←←← НОВОЕ: запускаем движение, повороты и спам ТОЛЬКО через 10 секунд после входа
+  setTimeout(() => {
+    startMovement(bot)
+    startLook(bot)
+    startChatSpam(bot)
+    console.log("AFK-функции запущены")
+  }, 10000)
 
   setInterval(() => {
-  bot.swingArm("right")
-}, 15000)
+    bot.swingArm("right")
+  }, 15000)
 })
 
 bot.on("death",()=>{
