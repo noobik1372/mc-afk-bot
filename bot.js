@@ -15,33 +15,37 @@ function createBot() {
 
   console.log(`[${USERNAME}] → Запуск...`)
 
+  // Отключаем все обработчики чата, чтобы не было ошибки "unknown chat format code"
+  bot._client.removeAllListeners('chat')
+  bot._client.removeAllListeners('systemChat')
+  bot._client.removeAllListeners('message')
+  bot._client.removeAllListeners('messagestr')
+
   bot.once('spawn', () => {
     bot.physicsEnabled = false
     console.log(`[${USERNAME}] → Зашёл на сервер`)
 
-    // Только register и login
     setTimeout(() => {
       bot.chat(`/register ${PASSWORD} ${PASSWORD}`)
-      console.log(`[${USERNAME}] → Отправлен /register`)
+      console.log(`[${USERNAME}] → /register`)
     }, 4000)
 
     setTimeout(() => {
       bot.chat(`/login ${PASSWORD}`)
-      console.log(`[${USERNAME}] → Отправлен /login`)
+      console.log(`[${USERNAME}] → /login`)
     }, 8000)
 
-    // Больше ничего не делаем — просто стоим
-    console.log(`[${USERNAME}] → Бот просто стоит на месте`)
+    console.log(`[${USERNAME}] → Бот просто стоит`)
   })
 
-  // Перезаход при отключении
+  // Перезаход при любом вылете
   bot.on('kicked', (reason) => {
     console.log(`[${USERNAME}] Кикнут:`, reason)
     setTimeout(createBot, 5000)
   })
 
   bot.on('end', () => {
-    console.log(`[${USERNAME}] Отключился — перезаход через 5 секунд`)
+    console.log(`[${USERNAME}] Отключился — перезаход через 5 сек`)
     setTimeout(createBot, 5000)
   })
 
