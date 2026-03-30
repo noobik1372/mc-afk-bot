@@ -20,7 +20,7 @@ function createBot() {
 
   console.log(`[${USERNAME}] → Запуск...`)
 
-  // Отключаем всё, что связано с чатом
+  // Отключаем всё связанное с чатом
   bot._client.removeAllListeners('chat')
   bot._client.removeAllListeners('systemChat')
   bot._client.removeAllListeners('message')
@@ -40,14 +40,23 @@ function createBot() {
       console.log(`[${USERNAME}] → /login`)
     }, 8000)
 
-    // Просто стоит, ничего больше не делаем
     bot.physicsEnabled = false
     console.log(`[${USERNAME}] → Бот просто стоит (физика отключена)`)
   })
 
+  // ←←← ОБРАБОТКА КИКОВ ←←←
   bot.on('kicked', (reason) => {
     console.log(`[${USERNAME}] Кик:`, reason)
-    setTimeout(createBot, 5000)
+
+    const reasonText = JSON.stringify(reason)
+
+    if (reasonText.includes("The same username is already playing on the server!")) {
+      console.log(`[${USERNAME}] Тот же ник уже на сервере — ждём 30 секунд`)
+      setTimeout(createBot, 30000)
+    } else {
+      console.log(`[${USERNAME}] Обычный кик — перезаход через 5 секунд`)
+      setTimeout(createBot, 5000)
+    }
   })
 
   bot.on('end', () => {
