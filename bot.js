@@ -1,7 +1,7 @@
 const mineflayer = require('mineflayer')
 const HOST = "blockoriasmp12010.mcsh.io"
 const PORT = 25565
-const USERNAME = "BlockoriaSMPBot"   // твой новый ник
+const USERNAME = "Bot_BlockoriaSMP"   // твой новый ник
 const PASSWORD = "botbotRU"
 
 process.on('uncaughtException', (err) => {
@@ -43,7 +43,7 @@ bot.once('spawn', async () => {
       console.log("Переведён в creative")
 
       setTimeout(() => {
-        bot.chat('/tp 0 100 0')        // ←←←← ИЗМЕНИ НА СВОИ КООРДИНАТЫ!!!
+        bot.chat('/tp 0 79 -1')        // ←←←← ИЗМЕНИ НА СВОИ КООРДИНАТЫ!!!
         console.log("Телепортирован на /tp 0 100 0")
         
         // Включаем физику обратно
