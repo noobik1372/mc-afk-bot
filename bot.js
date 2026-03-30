@@ -1,7 +1,7 @@
 const mineflayer = require('mineflayer')
 const HOST = "blockoriasmp12010.mcsh.io"
 const PORT = 25565
-const USERNAME = "BlockoriaSMPBot"
+const USERNAME = "Bot_BlockoriaSMP"
 const PASSWORD = "botbotRU"
 
 process.on('uncaughtException', (err) => {
