@@ -5,6 +5,11 @@ const PORT = 25565
 const USERNAME = "Bot_BlockoriaSMP"
 const PASSWORD = "botbotRU"
 
+process.on('uncaughtException', (err) => {
+  console.log('Поймана ошибка (unknown chat format) — перезапуск через 5 сек')
+  setTimeout(createBot, 5000)
+})
+
 function createBot() {
   const bot = mineflayer.createBot({
     host: HOST,
@@ -15,7 +20,7 @@ function createBot() {
 
   console.log(`[${USERNAME}] → Запуск...`)
 
-  // Отключаем все обработчики чата, чтобы не было ошибки "unknown chat format code"
+  // Отключаем всё, что связано с чатом
   bot._client.removeAllListeners('chat')
   bot._client.removeAllListeners('systemChat')
   bot._client.removeAllListeners('message')
@@ -35,12 +40,13 @@ function createBot() {
       console.log(`[${USERNAME}] → /login`)
     }, 8000)
 
-    console.log(`[${USERNAME}] → Бот просто стоит`)
+    // Просто стоит, ничего больше не делаем
+    bot.physicsEnabled = false
+    console.log(`[${USERNAME}] → Бот просто стоит (физика отключена)`)
   })
 
-  // Перезаход при любом вылете
   bot.on('kicked', (reason) => {
-    console.log(`[${USERNAME}] Кикнут:`, reason)
+    console.log(`[${USERNAME}] Кик:`, reason)
     setTimeout(createBot, 5000)
   })
 
