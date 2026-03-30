@@ -25,8 +25,8 @@ function createBot(){
     console.log("Бот заспавнился...")
 
     // Отключаем всю физику сразу
-   // bot.physicsEnabled = false
-    // console.log("Физика отключена")
+   bot.physicsEnabled = false
+   console.log("Физика отключена")
 
     // Регистрация и логин
     setTimeout(() => bot.chat(`/register ${PASSWORD} ${PASSWORD}`), 3000)
@@ -37,11 +37,11 @@ function createBot(){
 
       // Самое важное для 1.21.8 — сразу spectator!
       setTimeout(() => {
-        bot.chat('/gamemode spectator')
-        console.log("✅ Переведён в SPECTATOR (самая безопасная мода)")
+        bot.chat('/msg @a тест')
+        console.log("ькенр")
 
         setTimeout(() => {
-          bot.chat('/tp 0 100 0')        // ←←← ПОМЕНЯЙ НА СВОИ КООРДИНАТЫ!!!
+          bot.chat('/tp 0 79 -1')        // ←←← ПОМЕНЯЙ НА СВОИ КООРДИНАТЫ!!!
           console.log("✅ Телепорт выполнен")
 
           // Возвращаем creative через 5 секунд (можно убрать)
