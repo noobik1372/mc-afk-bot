@@ -1,7 +1,0 @@
-{
-  "name": "mc-afk-bot",
-  "version": "1.0.0",
-  "dependencies": {
-    "mineflayer": "^4.15.0"
-  }
-}
